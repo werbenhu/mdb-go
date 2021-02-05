@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	mdbUrl = "mongodb://root:bu12345@183.134.21.92:27017"
+	mdbUrl = "mongodb://root:pwd@127.0.0.1:27017"
 )
 
 func main() {
