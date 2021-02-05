@@ -28,9 +28,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\workspace\mdb-go" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\workspace\mdb-go\mdb" />
       <recent name="F:\workspace\mdb-go" />
