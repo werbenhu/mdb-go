@@ -16,12 +16,12 @@ import (
 )
 
 const (
-	mdbUrl = "mongodb://root:pwd@127.0.0.1:27017"
+	mdbHost = "mongodb://root:pwd@127.0.0.1:27017"
 )
 
 func main() {
 	mdbDestroy := mdb.Init(
-		mdb.OptUrl(mdbUrl),
+		mdb.OptHost(mdbHost),
 		mdb.OptPoolSize(2))
 	defer mdbDestroy()
 
@@ -46,7 +46,7 @@ func main() {
 
 	r.GET("/mongo", func(c *gin.Context) {
 
-		mongoDb := mongo.New(mdbUrl)
+		mongoDb := mongo.New(mdbHost)
 		mongoDb.Collection("bugDb", "list")
 		defer mongoDb.Close()
 

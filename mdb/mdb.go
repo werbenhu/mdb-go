@@ -22,9 +22,9 @@ var mu sync.Mutex
 var instance *Mdb
 
 type Opt struct {
-	context context.Context
-	poolSize int
-	connectUrl string //	mongodb://username:password@1270.0.01:27017
+	Context context.Context
+	PoolSize int
+	Host string //	mongodb://username:password@1270.0.01:27017
 }
 
 type Mdb struct {
@@ -53,19 +53,19 @@ func NewOptItem(inject func(opt *Opt)) OptItem {
 
 func OptCtx(ctx context.Context) OptItem {
 	return NewOptItem(func(opt *Opt) {
-		opt.context = ctx
+		opt.Context = ctx
 	})
 }
 
-func OptUrl(url string) OptItem {
+func OptHost(host string) OptItem {
 	return NewOptItem(func(opt *Opt) {
-		opt.connectUrl = url
+		opt.Host = host
 	})
 }
 
 func OptPoolSize(size int) OptItem {
 	return NewOptItem(func(opt *Opt) {
-		opt.poolSize = size
+		opt.PoolSize = size
 	})
 }
 
@@ -95,9 +95,9 @@ func Init(opts...OptItem) func() {
 	instance = new(Mdb)
 	// default options
 	opt := &Opt{
-		context:context.Background(),
-		poolSize: 1,
-		connectUrl: "mongodb://root:123456@127.0.0.1:27017",
+		Context:context.Background(),
+		PoolSize: 1,
+		Host: "mongodb://root:123456@127.0.0.1:27017",
 	}
 
 	// set options by args
@@ -106,11 +106,11 @@ func Init(opts...OptItem) func() {
 	}
 	instance.opt = opt
 
-	if opt.poolSize < 1 {
+	if opt.PoolSize < 1 {
 		log.Fatalf("Error pool size illegal\n")
 	}
 
-	instance.mdbArray = make([]*mongo.Session, opt.poolSize)
+	instance.mdbArray = make([]*mongo.Session, opt.PoolSize)
 	return instance.Destroy
 }
 
@@ -138,7 +138,7 @@ func (m *Mdb) Get() *mongo.Session {
 	if nil == m.mdbArray[index]{
 		mu.Lock()
 		defer mu.Unlock()
-		m.mdbArray[index] = mongo.New(m.opt.connectUrl)
+		m.mdbArray[index] = mongo.New(m.opt.Host)
 	}
 	return m.mdbArray[index]
 }
