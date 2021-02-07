@@ -30,7 +30,7 @@ func main() {
 	//	PoolSize: 2,
 	//	Context: context.Background(),
 	//}
-	//mdbDestroy := mdb.Init(mdb.NewOpts(opt)...)
+	//mdbDestroy := mdb.Init(opt.Build()...)
 	//defer mdbDestroy()
 
 	r := gin.Default()

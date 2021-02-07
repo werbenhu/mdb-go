@@ -27,6 +27,14 @@ type Opt struct {
 	Host string //	mongodb://username:password@1270.0.01:27017
 }
 
+func (opt *Opt) Build() []OptItem{
+	return []OptItem {
+		OptCtx(opt.Context),
+		OptHost(opt.Host),
+		OptPoolSize(opt.PoolSize),
+	}
+}
+
 type Mdb struct {
 	opt *Opt
 	mdbArray []*mongo.Session
@@ -43,14 +51,6 @@ type OptItem struct {
 
 func (item *OptItem) apply(opt *Opt) {
 	item.inject(opt)
-}
-
-func NewOpts(opt *Opt) []OptItem {
-	return []OptItem {
-		OptCtx(opt.Context),
-		OptHost(opt.Host),
-		OptPoolSize(opt.PoolSize),
-	}
 }
 
 func NewOptItem(inject func(opt *Opt)) OptItem {
