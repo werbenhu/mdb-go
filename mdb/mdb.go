@@ -45,6 +45,14 @@ func (item *OptItem) apply(opt *Opt) {
 	item.inject(opt)
 }
 
+func NewOpts(opt *Opt) []OptItem {
+	return []OptItem {
+		OptCtx(opt.Context),
+		OptHost(opt.Host),
+		OptPoolSize(opt.PoolSize),
+	}
+}
+
 func NewOptItem(inject func(opt *Opt)) OptItem {
 	return OptItem{
 		inject: inject,

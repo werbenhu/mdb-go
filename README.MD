@@ -20,6 +20,14 @@ func main() {
 		mdb.OptPoolSize(2))
 	defer mdbDestroy()
 
+	//opt := &mdb.Opt{
+	//	Host: mdbHost,
+	//	PoolSize: 2,
+	//	Context: context.Background(),
+	//}
+	//mdbDestroy := mdb.Init(mdb.NewOpts(opt)...)
+	//defer mdbDestroy()
+
 	r := gin.Default()
 
 	r.GET("/mdb", func(c *gin.Context) {
